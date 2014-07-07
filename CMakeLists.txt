@@ -28,3 +28,8 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 #rosbuild_link_boost(${PROJECT_NAME} thread)
 #rosbuild_add_executable(example examples/example.cpp)
 #target_link_libraries(example ${PROJECT_NAME})
+
+# to show header files in Qt Creator
+file(GLOB_RECURSE HEADER_FILES include/*.h)
+
+rosbuild_add_executable(test_serialization test/test_serialization.cpp ${HEADER_FILES})
