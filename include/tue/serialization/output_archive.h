@@ -18,6 +18,8 @@ public:
 
     virtual ~OutputArchive() {}
 
+    inline OutputArchive& operator<<(unsigned char c) { stream_.write((char*)&c, sizeof(c)); return *this; }
+
     inline OutputArchive& operator<<(float f) { stream_.write((char*)&f, sizeof(f)); return *this; }
 
     inline OutputArchive& operator<<(double d) { stream_.write((char*)&d, sizeof(d)); return *this; }

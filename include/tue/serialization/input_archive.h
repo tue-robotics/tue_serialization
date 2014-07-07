@@ -18,6 +18,8 @@ public:
 
     virtual ~InputArchive() {}
 
+    inline InputArchive& operator>>(unsigned char& c) { stream_.read((char*)&c, sizeof(c)); return *this; }
+
     inline InputArchive& operator>>(float& f) { stream_.read((char*)&f, sizeof(f)); return *this; }
 
     inline InputArchive& operator>>(double& d) { stream_.read((char*)&d, sizeof(d)); return *this; }
