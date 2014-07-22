@@ -32,4 +32,6 @@ rosbuild_genmsg()
 # to show header files in Qt Creator
 file(GLOB_RECURSE HEADER_FILES include/*.h)
 
+rosbuild_add_library(tue_serialization src/conversions.cpp)
+
 rosbuild_add_executable(test_serialization test/test_serialization.cpp ${HEADER_FILES})

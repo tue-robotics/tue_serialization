@@ -9,8 +9,8 @@
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/tue_serialization</url>
 
-<export>
-    <cpp cflags="-I${prefix}/include" lflags=""/>
+  <export>
+    <cpp cflags="-I${prefix}/include" lflags="-Wl,-rpath,${prefix}/lib -L${prefix}/lib -ltue_serialization"/>
   </export>
 
 </package>
