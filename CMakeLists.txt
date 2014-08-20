@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(tue_serialization)
 
-find_package(catkin REQUIRED message_generation)
+find_package(catkin REQUIRED COMPONENTS message_generation)
 # find_package(Boost REQUIRED COMPONENTS system)
 
 add_message_files(
@@ -25,7 +25,7 @@ generate_messages(
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES tue_serialization
-  CATKIN DEPENDS message_runtime
+  CATKIN_DEPENDS message_runtime
 )
 
 ###########
