@@ -9,6 +9,11 @@ add_message_files(
   Binary.msg
 )
 
+add_service_files(
+  FILES
+  BinaryService.srv
+)
+
 generate_messages(
   DEPENDENCIES
 )
