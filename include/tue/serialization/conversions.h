@@ -6,15 +6,22 @@
 
 #include "input_archive.h"
 #include "output_archive.h"
+#include "archive.h"
 
 namespace tue
 {
 namespace serialization
 {
 
-void convert(std::istream& s, std::vector<unsigned char>& data);
+void convert(Archive& a, std::vector<unsigned char>& data);
 
-void convert(const std::vector<unsigned char>& data, std::ostream& s);
+void convert(std::vector<unsigned char>& data, Archive& a);
+
+
+
+void convert(std::istream& s, std::vector<unsigned char>& data, int d_offset = 0);
+
+void convert(const std::vector<unsigned char>& data, std::ostream& s, int d_offset = 0);
 
 }
 

@@ -12,9 +12,8 @@ class Archive {
 
 public:
 
-    Archive(int version = 0) {
-        stream_.write((char*)&version, sizeof(version));
-        stream_.read((char*)&version_, sizeof(version_));
+    Archive(int version = 0) : version_(version)
+    {
     }
 
     virtual ~Archive() {}
@@ -56,7 +55,7 @@ public:
 
     inline std::stringstream& stream() { return stream_; }
 
-    inline int getVersion() { return version_; }
+    inline int version() { return version_; }
 
 protected:
 
