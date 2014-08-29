@@ -3,6 +3,7 @@
 #include <tue/serialization/output_archive.h>
 
 #include <tue/serialization/filesystem.h>
+#include <tue/serialization/version.h>
 
 #include <fstream>
 
@@ -17,7 +18,7 @@ int main(int argc, char **argv) {
         int i = 123;
         std::string s = "Hello, this is just a simple test";
 
-        tue::serialization::Archive a_out(123);
+        tue::serialization::Archive a_out;
         a_out << d << f << i << s;
 
         tue::serialization::toFile(a_out, test_filename);

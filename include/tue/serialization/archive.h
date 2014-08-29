@@ -4,6 +4,8 @@
 #include <sstream>
 #include <vector>
 
+#include "tue/serialization/version.h"
+
 namespace tue
 {
 namespace serialization
@@ -13,7 +15,7 @@ class Archive {
 
 public:
 
-    Archive(int version = 0) : version_(version)
+    Archive() : version_(tue::serialization::VERSION)
     {
     }
 

@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+#include "tue/serialization/version.h"
+
 namespace tue
 {
 namespace serialization
@@ -12,8 +14,8 @@ class OutputArchive {
 
 public:
 
-    OutputArchive(std::ostream& stream, int version) : stream_(stream) {
-        stream_.write((char*)&version, sizeof(version));
+    OutputArchive(std::ostream& stream) : stream_(stream) {
+        stream_.write((char*)&tue::serialization::VERSION, sizeof(tue::serialization::VERSION));
     }
 
     virtual ~OutputArchive() {}
@@ -28,7 +30,7 @@ public:
 
     inline OutputArchive& operator<<(std::string s) { stream_.write(s.c_str(), s.size() + 1); return *this; }
 
-    inline std::ostream& getStream() { return stream_; }
+    inline std::ostream& stream() { return stream_; }
 
 protected:
 
