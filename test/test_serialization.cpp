@@ -2,6 +2,8 @@
 #include <tue/serialization/input_archive.h>
 #include <tue/serialization/output_archive.h>
 
+#include <tue/serialization/filesystem.h>
+
 #include <fstream>
 
 int main(int argc, char **argv) {
@@ -15,30 +17,26 @@ int main(int argc, char **argv) {
         int i = 123;
         std::string s = "Hello, this is just a simple test";
 
-        // write
-        std::ofstream f_out;
-        f_out.open(test_filename.c_str(), std::ifstream::binary);
-
-        tue::serialization::OutputArchive a_out(f_out, 0);
+        tue::serialization::Archive a_out(123);
         a_out << d << f << i << s;
-        f_out.close();
+
+        tue::serialization::toFile(a_out, test_filename);
     }
 
     {
+        tue::serialization::Archive a_in;
+        tue::serialization::fromFile(test_filename, a_in);
+
         // read
         double d;
         float f;
         int i;
         std::string s;
 
-        std::ifstream f_in;
-        f_in.open(test_filename.c_str(), std::ifstream::binary);
-
-        tue::serialization::InputArchive a_in(f_in);
         a_in >> d >> f >> i >> s;
-        f_in.close();
 
         std::cout << d << ", " << f << ", " << i << ", \"" << s << "\"" << std::endl;
+        std::cout << a_in.version() << std::endl;
     }
 
     tue::serialization::Archive a;

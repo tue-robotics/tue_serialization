@@ -1,4 +1,7 @@
 #include "tue/serialization/conversions.h"
+#include "tue/serialization/output_archive.h"
+
+#include <string.h>   // memcpy
 
 namespace tue
 {
@@ -9,14 +12,31 @@ namespace serialization
 
 void convert(Archive& a, std::vector<unsigned char>& data)
 {
-    convert(a.stream(), data, 4);  // 4 = offset for the archive version (4-byte int)
+    int version = a.version();
+    convert(a.stream(), data, sizeof(version));
+
+    // Fill version bytes
+    memcpy(&data[0], (char*)&version, sizeof(version));
 }
 
 // ----------------------------------------------------------------------------------------------------
 
-void convert(std::vector<unsigned char>& data, Archive& a)
+void convert(const Archive& a, std::ostream& out)
 {
-    convert(data, a.stream(), 4);  // 4 = offset for the archive version (4-byte int)
+    // Write the version to out
+    OutputArchive a_out(out, a.version());
+
+    // Write data to out
+    out << a.stream().rdbuf();
+}
+
+// ----------------------------------------------------------------------------------------------------
+
+void convert(std::istream& s, Archive& a)
+{
+    std::vector<unsigned char> data;
+    convert(s, data);
+    convert(data, a);
 }
 
 // ----------------------------------------------------------------------------------------------------
@@ -30,6 +50,18 @@ void convert(std::istream& s, std::vector<unsigned char>& data, int d_offset)
 
     data.resize(size + d_offset);
     s.read((char*)&data[d_offset], size);
+}
+
+// ----------------------------------------------------------------------------------------------------
+
+void convert(std::vector<unsigned char>& data, Archive& a)
+{
+    // Read version (int)
+    int version;
+    memcpy((char*)&(a.version_), &data[0], sizeof(version));
+
+    // Read the rest
+    convert(data, a.stream(), sizeof(version));
 }
 
 // ----------------------------------------------------------------------------------------------------

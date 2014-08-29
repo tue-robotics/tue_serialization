@@ -2,6 +2,7 @@
 #define TUE_SERIALIZATION_ARCHIVE_H_
 
 #include <sstream>
+#include <vector>
 
 namespace tue
 {
@@ -55,13 +56,17 @@ public:
 
     inline std::stringstream& stream() { return stream_; }
 
-    inline int version() { return version_; }
+    inline const std::stringstream& stream() const { return stream_; }
+
+    inline int version() const { return version_; }
 
 protected:
 
     std::stringstream stream_;
 
     int version_;
+
+    friend void convert(std::vector<unsigned char>& data, Archive& a);
 
 };
 

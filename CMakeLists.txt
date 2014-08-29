@@ -39,9 +39,13 @@ catkin_package(
 
 include_directories(include)
 
-add_library(tue_serialization src/conversions.cpp)
+add_library(tue_serialization
+    src/conversions.cpp
+    src/filesystem.cpp
+)
 
 add_executable(test_serialization test/test_serialization.cpp)
+target_link_libraries(test_serialization tue_serialization)
 
 add_dependencies(tue_serialization ${PROJECT_NAME}_gencpp)
 add_dependencies(test_serialization ${PROJECT_NAME}_gencpp)
