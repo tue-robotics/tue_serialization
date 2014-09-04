@@ -22,9 +22,10 @@ install:
 before_script:
   - source ~/.tue/setup.bash # source ROS
   - cd ${TUE_SYSTEM_DIR}/src
-  - ls
+
+  # Link the repo we are testing to the new workspace
   - rm -rf $REPOSITORY_NAME
-  - ln -s $CI_SOURCE_PATH . # Link the repo we are testing to the new workspace
+  - ln -s $CI_SOURCE_PATH . 
   - ls -l
   - cd .. # go to the catkin workspace
 
