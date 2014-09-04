@@ -25,7 +25,8 @@ install:
 #  - cd ~/ros/ws_${REPOSITORY_NAME}/src
   - export TUE_ROS_DISTRO=$ROS_DISTRO
   - curl -k https://roboticssrv.wtb.tue.nl/svn/ros/tue_env/installer/scripts/bootstrap | bash
-  - pwd
+  - tue-get install ros-${REPOSITORY_NAME}
+  - cd $TUE_SYSTEM_DIR
   - ls
 #  - wstool init .
 #  - wstool update
