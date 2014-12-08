@@ -30,6 +30,8 @@ public:
 
     inline OutputArchive& operator<<(std::string s) { stream_.write(s.c_str(), s.size() + 1); return *this; }
 
+    inline OutputArchive& write(const char* data, unsigned int size) { stream_.write(data, size); return *this; }
+
     inline std::ostream& stream() { return stream_; }
 
 protected:
