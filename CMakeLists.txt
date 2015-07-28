@@ -46,11 +46,13 @@ set(HEADER_FILES
     include/tue/serialization/conversions.h
     include/tue/serialization/output_archive.h
     include/tue/serialization/filesystem.h
+    include/tue/serialization/file.h
 )
 
 add_library(tue_serialization
     src/conversions.cpp
     src/filesystem.cpp
+    src/file.cpp
 )
 
 add_executable(test_serialization test/test_serialization.cpp ${HEADER_FILES})
@@ -58,6 +60,10 @@ target_link_libraries(test_serialization tue_serialization)
 
 add_dependencies(tue_serialization ${PROJECT_NAME}_gencpp)
 add_dependencies(test_serialization ${PROJECT_NAME}_gencpp)
+
+add_executable(test_file test/test_file.cpp ${HEADER_FILES})
+target_link_libraries(test_file tue_serialization)
+
 
 ## Specify libraries to link a library or executable target against
 # target_link_libraries(tue_serialization_node
