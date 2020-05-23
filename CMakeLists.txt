@@ -1,8 +1,10 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(tue_serialization)
 
-find_package(catkin REQUIRED COMPONENTS message_generation)
-# find_package(Boost REQUIRED COMPONENTS system)
+find_package(catkin REQUIRED COMPONENTS
+  message_generation
+  std_msgs
+)
 
 add_message_files(
   FILES
@@ -16,6 +18,7 @@ add_service_files(
 
 generate_messages(
   DEPENDENCIES
+  std_msgs
 )
 
 ###################################
@@ -30,74 +33,30 @@ generate_messages(
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES tue_serialization
-  CATKIN_DEPENDS message_runtime
+  CATKIN_DEPENDS message_runtime std_msgs
 )
 
 ###########
 ## Build ##
 ###########
 
-include_directories(include)
-
-set(HEADER_FILES
-    include/tue/serialization/version.h
-    include/tue/serialization/input_archive.h
-    include/tue/serialization/archive.h
-    include/tue/serialization/conversions.h
-    include/tue/serialization/output_archive.h
-    include/tue/serialization/filesystem.h
+include_directories(
+  include
+  ${catkin_INCLUDE_DIRS}
 )
+
+file(GLOB_RECURSE HEADER_FILES include/*.h)
 
 add_library(tue_serialization
-    src/conversions.cpp
-    src/filesystem.cpp
+  src/conversions.cpp
+  src/filesystem.cpp
 )
 
-add_executable(test_serialization test/test_serialization.cpp ${HEADER_FILES})
+add_executable(test_serialization test/test_serialization.cpp)
 target_link_libraries(test_serialization tue_serialization)
 
-add_dependencies(tue_serialization ${PROJECT_NAME}_gencpp)
-add_dependencies(test_serialization ${PROJECT_NAME}_gencpp)
-
-## Specify libraries to link a library or executable target against
-# target_link_libraries(tue_serialization_node
-#   ${catkin_LIBRARIES}
-# )
-
-#############
-## Install ##
-#############
-
-# all install targets should use catkin DESTINATION variables
-# See http://ros.org/doc/api/catkin/html/adv_user_guide/variables.html
-
-## Mark executable scripts (Python etc.) for installation
-## in contrast to setup.py, you can choose the destination
-# install(PROGRAMS
-#   scripts/my_python_script
-#   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-# )
-
-## Mark executables and/or libraries for installation
-# install(TARGETS tue_serialization tue_serialization_node
-#   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-#   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-#   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-# )
-
-## Mark cpp header files for installation
-# install(DIRECTORY include/${PROJECT_NAME}/
-#   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
-#   FILES_MATCHING PATTERN "*.h"
-#   PATTERN ".svn" EXCLUDE
-# )
-
-## Mark other files for installation (e.g. launch and bag files, etc.)
-# install(FILES
-#   # myfile1
-#   # myfile2
-#   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-# )
+add_dependencies(tue_serialization ${${PROJECT_NAME}_EXPORTED_TARGETS})
+add_dependencies(test_serialization ${${PROJECT_NAME}_EXPORTED_TARGETS})
 
 #############
 ## Testing ##
@@ -108,6 +67,3 @@ add_dependencies(test_serialization ${PROJECT_NAME}_gencpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()
-
-## Add folders to be run by python nosetests
-# catkin_add_nosetests(test)
