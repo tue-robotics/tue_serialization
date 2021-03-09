@@ -3,7 +3,6 @@ project(tue_serialization)
 
 find_package(catkin REQUIRED COMPONENTS
   message_generation
-  std_msgs
 )
 
 add_message_files(
@@ -18,7 +17,6 @@ add_service_files(
 
 generate_messages(
   DEPENDENCIES
-  std_msgs
 )
 
 ###################################
@@ -33,7 +31,7 @@ generate_messages(
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES tue_serialization
-  CATKIN_DEPENDS message_runtime std_msgs
+  CATKIN_DEPENDS message_runtime
 )
 
 ###########
