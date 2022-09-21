@@ -7,7 +7,7 @@
 
 #include <fstream>
 
-int main(int argc, char **argv) {
+int main() {
 
     std::string test_filename = "/tmp/tue_test_serialization";
 
