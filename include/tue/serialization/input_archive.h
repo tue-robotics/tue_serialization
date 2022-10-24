@@ -39,9 +39,9 @@ public:
         return *this;
     }
 
-    inline std::istream& getStream() { return stream_; }
+    inline std::istream& stream() { return stream_; }
 
-    inline int getVersion() { return version_; }
+    inline int version() { return version_; }
 
 protected:
 
