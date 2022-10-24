@@ -29,7 +29,7 @@ public:
     inline InputArchive& operator>>(std::string& s) {
         s.clear();
         char c;
-        while(true) {
+        while(!stream_.eof()) {
             stream_.read(&c, 1);
             if (c == '\0') {
                 break;
