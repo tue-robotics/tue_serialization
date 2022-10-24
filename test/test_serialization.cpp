@@ -6,20 +6,39 @@
 #include <tue/serialization/version.h>
 
 #include <fstream>
+#include <sstream>
 
-int main() {
+int main()
+{
+    // example
+    const double d_c = 3.15;
+    const float f_c = 5.0;
+    const int i_c = 123;
+    const std::string s_c = "Hello, this is just a simple test";
+
+    {
+        std::stringstream ss;
+        tue::serialization::OutputArchive a_out(ss);
+        a_out << d_c << f_c << i_c << s_c;
+
+        // read
+        double d;
+        float f;
+        int i;
+        std::string s;
+
+        tue::serialization::InputArchive a_in(ss);
+        a_in >> d >> f >> i >> s;
+        std::cout << d << ", " << f << ", " << i << ", \"" << s << "\"" << std::endl;
+        std::cout << "version: " << a_in.version() << std::endl;
+    }
+
 
     std::string test_filename = "/tmp/tue_test_serialization";
 
     {
-        // example
-        double d = 3.15;
-        float f = 5.0;
-        int i = 123;
-        std::string s = "Hello, this is just a simple test";
-
         tue::serialization::Archive a_out;
-        a_out << d << f << i << s;
+        a_out << d_c << f_c << i_c << s_c;
 
         tue::serialization::toFile(a_out, test_filename);
     }
@@ -37,19 +56,13 @@ int main() {
         a_in >> d >> f >> i >> s;
 
         std::cout << d << ", " << f << ", " << i << ", \"" << s << "\"" << std::endl;
-        std::cout << a_in.version() << std::endl;
+        std::cout << "version: " << a_in.version() << std::endl;
     }
 
     tue::serialization::Archive a;
 
     {
-        // example
-        double d = 3.15;
-        float f = 5.0;
-        int i = 123;
-        std::string s = "Hello, this is just a simple test";
-
-        a << d << f << i << s;
+        a << d_c << f_c << i_c << s_c;
     }
 
     {
@@ -62,6 +75,7 @@ int main() {
         a >> d >> f >> i >> s;
 
         std::cout << d << ", " << f << ", " << i << ", \"" << s << "\"" << std::endl;
+        std::cout << "version: " << a.version() << std::endl;
     }
 
     return 0;
