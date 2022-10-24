@@ -52,6 +52,7 @@ file(GLOB_RECURSE HEADER_FILES include/*.h)
 add_library(tue_serialization
   src/conversions.cpp
   src/filesystem.cpp
+  ${HEADER_FILES}
 )
 
 add_executable(test_serialization test/test_serialization.cpp)
