@@ -13,7 +13,7 @@
 // example
 
 
-class tue_serialization : public ::testing::Test {
+class tue_serialization : public testing::Test {
  protected:
     const double d_c = 3.15;
     const float f_c = 5.0;
