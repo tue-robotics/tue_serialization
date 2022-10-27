@@ -49,24 +49,19 @@ include_directories(
 
 file(GLOB_RECURSE HEADER_FILES include/*.h)
 
-add_library(tue_serialization
+add_library(${PROJECT_NAME}
   src/conversions.cpp
   src/filesystem.cpp
   ${HEADER_FILES}
 )
-
-add_executable(test_serialization test/test_serialization.cpp)
-target_link_libraries(test_serialization tue_serialization)
-
+target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES})
 add_dependencies(tue_serialization ${${PROJECT_NAME}_EXPORTED_TARGETS})
-add_dependencies(test_serialization ${${PROJECT_NAME}_EXPORTED_TARGETS})
 
 #############
 ## Testing ##
 #############
 
-## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_tue_serialization.cpp)
-# if(TARGET ${PROJECT_NAME}-test)
-#   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
-# endif()
+if (CATKIN_ENABLE_TESTING)
+  catkin_add_gtest(${PROJECT_NAME}-test test/test_tue_serialization.cpp)
+  target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
+endif()
