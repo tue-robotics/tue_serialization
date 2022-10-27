@@ -81,27 +81,23 @@ TEST_F(tue_serialization, Archive)
 {
     tue::serialization::Archive a;
 
-    {
-        a << d_c << f_c << i_c << s_c;
-    }
+    a << d_c << f_c << i_c << s_c;
 
-    {
-        // read
-        double d;
-        float f;
-        int i;
-        std::string s;
+    // read
+    double d;
+    float f;
+    int i;
+    std::string s;
 
-        a >> d >> f >> i >> s;
+    a >> d >> f >> i >> s;
 
-        EXPECT_DOUBLE_EQ(d, d_c);
-        EXPECT_FLOAT_EQ(f, f_c);
-        EXPECT_EQ(i, i_c);
-        EXPECT_EQ(s, s_c);
-        std::cout << "Archive:" << std::endl;
-        std::cout << d << ", " << f << ", " << i << ", \"" << s << "\"" << std::endl;
-        std::cout << "version: " << a.version() << std::endl;
-    }
+    EXPECT_DOUBLE_EQ(d, d_c);
+    EXPECT_FLOAT_EQ(f, f_c);
+    EXPECT_EQ(i, i_c);
+    EXPECT_EQ(s, s_c);
+    std::cout << "Archive:" << std::endl;
+    std::cout << d << ", " << f << ", " << i << ", \"" << s << "\"" << std::endl;
+    std::cout << "version: " << a.version() << std::endl;
 }
 
 // Run all the tests that were declared with TEST()
