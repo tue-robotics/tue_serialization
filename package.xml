@@ -5,7 +5,7 @@
 <package format="3">
   <name>tue_serialization</name>
   <version>0.0.0</version>
-  <description>The tue_serialization package</description>
+  <description>Simple library for serialization of datastreams</description>
 
   <author email="s.v.d.dries@tue.nl">Sjoerd van den Dries</author>
 
@@ -19,6 +19,8 @@
 
   <build_export_depend>message_runtime</build_export_depend>
   <exec_depend>message_runtime</exec_depend>
+
+  <test_depend>catkin_lint_cmake</test_depend>
 
   <doc_depend>doxygen</doc_depend>
 

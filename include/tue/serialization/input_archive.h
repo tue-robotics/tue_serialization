@@ -29,7 +29,7 @@ public:
     inline InputArchive& operator>>(std::string& s) {
         s.clear();
         char c;
-        while(true) {
+        while(!stream_.eof()) {
             stream_.read(&c, 1);
             if (c == '\0') {
                 break;
@@ -39,9 +39,9 @@ public:
         return *this;
     }
 
-    inline std::istream& getStream() { return stream_; }
+    inline std::istream& stream() { return stream_; }
 
-    inline int getVersion() { return version_; }
+    inline int version() { return version_; }
 
 protected:
 
