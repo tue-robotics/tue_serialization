@@ -89,7 +89,7 @@ public:
         return *this;
     }
 
-    inline Archive& operator<<(std::string s)
+    inline Archive& operator<<(const std::string& s)
     {
         stream_.write(s.c_str(), s.size() + 1);
         return *this;

@@ -45,7 +45,7 @@ public:
         return *this;
     }
 
-    inline OutputArchive& operator<<(std::string s)
+    inline OutputArchive& operator<<(const std::string& s)
     {
         stream_.write(s.c_str(), s.size() + 1);
         return *this;
