@@ -4,21 +4,19 @@
 #include <istream>
 #include <vector>
 
+#include "archive.h"
 #include "input_archive.h"
 #include "output_archive.h"
-#include "archive.h"
 
-namespace tue
-{
-namespace serialization
-{
+namespace tue {
+namespace serialization {
 
-bool toFile(const Archive& a, const std::string& filename);
+bool toFile(const Archive &a, const std::string &filename);
 
-bool fromFile(const std::string& filename, Archive& a);
+bool fromFile(const std::string &filename, Archive &a);
 
-}
+} // namespace serialization
 
-}
+} // namespace tue
 
 #endif
