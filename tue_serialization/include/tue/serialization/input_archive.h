@@ -3,59 +3,67 @@
 
 #include <iostream>
 
-namespace tue {
-namespace serialization {
+namespace tue
+{
+namespace serialization
+{
 
-class InputArchive {
+class InputArchive
+{
 
 public:
-  InputArchive(std::istream &stream) : stream_(stream) {
-    stream_.read((char *)&version_, sizeof(version_));
-  }
+    InputArchive(std::istream& stream) : stream_(stream) { stream_.read((char*)&version_, sizeof(version_)); }
 
-  virtual ~InputArchive() {}
+    virtual ~InputArchive() {}
 
-  inline InputArchive &operator>>(unsigned char &c) {
-    stream_.read((char *)&c, sizeof(c));
-    return *this;
-  }
-
-  inline InputArchive &operator>>(float &f) {
-    stream_.read((char *)&f, sizeof(f));
-    return *this;
-  }
-
-  inline InputArchive &operator>>(double &d) {
-    stream_.read((char *)&d, sizeof(d));
-    return *this;
-  }
-
-  inline InputArchive &operator>>(int &i) {
-    stream_.read((char *)&i, sizeof(i));
-    return *this;
-  }
-
-  inline InputArchive &operator>>(std::string &s) {
-    s.clear();
-    char c;
-    while (!stream_.eof()) {
-      stream_.read(&c, 1);
-      if (c == '\0') {
-        break;
-      }
-      s += c;
+    inline InputArchive& operator>>(unsigned char& c)
+    {
+        stream_.read((char*)&c, sizeof(c));
+        return *this;
     }
-    return *this;
-  }
 
-  inline std::istream &stream() { return stream_; }
+    inline InputArchive& operator>>(float& f)
+    {
+        stream_.read((char*)&f, sizeof(f));
+        return *this;
+    }
 
-  inline int version() { return version_; }
+    inline InputArchive& operator>>(double& d)
+    {
+        stream_.read((char*)&d, sizeof(d));
+        return *this;
+    }
+
+    inline InputArchive& operator>>(int& i)
+    {
+        stream_.read((char*)&i, sizeof(i));
+        return *this;
+    }
+
+    inline InputArchive& operator>>(std::string& s)
+    {
+        s.clear();
+        char c;
+        while (!stream_.eof())
+        {
+            stream_.read(&c, 1);
+            if (c == '\0')
+            {
+                break;
+            }
+            s += c;
+        }
+        return *this;
+    }
+
+    inline std::istream& stream() { return stream_; }
+
+    inline int version() { return version_; }
 
 protected:
-  std::istream &stream_;
+    std::istream& stream_;
 
-  int version_;
+    int version_;
 };
 
 } // namespace serialization
