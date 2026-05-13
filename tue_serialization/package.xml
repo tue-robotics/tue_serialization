@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<?xml-model
+  href="http://download.ros.org/schema/package_format3.xsd"
+  schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>tue_serialization</name>
+  <version>0.0.0</version>
+  <description>Simple library for serialization of datastreams</description>
+
+  <maintainer email="MatthijsBurgh@outlook.com">Matthijs van der Burgh</maintainer>
+
+  <license>BSD</license>
+
+  <author email="s.v.d.dries@tue.nl">Sjoerd van den Dries</author>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <test_depend>ament_cmake_clang_format</test_depend>
+  <test_depend>ament_cmake_clang_tidy</test_depend>
+  <test_depend>ament_cmake_gtest</test_depend>
+  <test_depend>ament_cmake_lint_cmake</test_depend>
+  <test_depend>ament_cmake_xmllint</test_depend>
+  <test_depend>clang-format-21</test_depend>
+  <test_depend>clang-tidy-21</test_depend>
+  <test_depend>tue_lint_config</test_depend>
+
+  <doc_depend>doxygen</doc_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+    <rosdoc config="rosdoc.yaml" />
+  </export>
+
+</package>

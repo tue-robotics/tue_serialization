@@ -3,13 +3,8 @@
 
 namespace tue
 {
-namespace serialization
-{
+namespace serialization { static int VERSION = 1; }
 
-static int VERSION = 1;
-
-}
-
-}
+} // namespace tue
 
 #endif
