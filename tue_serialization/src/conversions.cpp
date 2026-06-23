@@ -1,7 +1,7 @@
 #include "tue/serialization/conversions.h"
 #include "tue/serialization/output_archive.h"
 
-#include <string.h>   // memcpy
+#include <string.h> // memcpy
 
 namespace tue
 {
@@ -42,7 +42,7 @@ void convert(std::istream& s, Archive& a)
 // ----------------------------------------------------------------------------------------------------
 
 void convert(std::istream& s, std::vector<unsigned char>& data, int d_offset)
-{   
+{
     // get its size:
     s.seekg(0, std::ios::end);
     int size = s.tellg();
@@ -67,10 +67,10 @@ void convert(std::vector<unsigned char>& data, Archive& a)
 // ----------------------------------------------------------------------------------------------------
 
 void convert(const std::vector<unsigned char>& data, std::ostream& s, int d_offset)
-{   
+{
     s.write((char*)&data[d_offset], data.size() - d_offset);
 }
 
-}
+} // namespace serialization
 
-}
+} // namespace tue

@@ -48,6 +48,6 @@ bool fromFile(const std::string& filename, Archive& a)
     return true;
 }
 
-}
+} // namespace serialization
 
-}
+} // namespace tue

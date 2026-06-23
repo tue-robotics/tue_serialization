@@ -4,15 +4,14 @@
 #include <istream>
 #include <vector>
 
+#include "archive.h"
 #include "input_archive.h"
 #include "output_archive.h"
-#include "archive.h"
 
 namespace tue
 {
 namespace serialization
 {
-
 
 // ----------------------------------------------------------------------------------------------------
 
@@ -28,9 +27,8 @@ void convert(std::vector<unsigned char>& data, Archive& a);
 
 void convert(const std::vector<unsigned char>& data, std::ostream& s, int d_offset = 0);
 
+} // namespace serialization
 
-}
-
-}
+} // namespace tue
 
 #endif
