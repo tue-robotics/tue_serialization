@@ -27,7 +27,7 @@ void convert(Archive& a, std::vector<unsigned char>& data)
 void convert(const Archive& a, std::ostream& out)
 {
     // Write the version to out
-    const OutputArchive a_out(out);
+    [[maybe_unused]] OutputArchive a_out(out);
 
     // Write data to out
     out << a.stream().rdbuf();
@@ -60,11 +60,10 @@ void convert(std::istream& s, std::vector<unsigned char>& data, int d_offset)
 void convert(std::vector<unsigned char>& data, Archive& a)
 {
     // Read version (int)
-    const int version = 0;
-    std::memcpy(&a.version_, data.data(), sizeof(version));
+    std::memcpy(&a.version_, data.data(), sizeof(a.version_));
 
     // Read the rest
-    convert(data, a.stream(), sizeof(version));
+    convert(data, a.stream(), sizeof(a.version_));
 }
 
 // ----------------------------------------------------------------------------------------------------
