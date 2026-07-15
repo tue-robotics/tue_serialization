@@ -27,7 +27,7 @@ void convert(Archive& a, std::vector<unsigned char>& data)
 void convert(const Archive& a, std::ostream& out)
 {
     // Write the version to out
-    [[maybe_unused]] OutputArchive a_out(out);
+    [[maybe_unused]] const OutputArchive a_out(out);
 
     // Write data to out
     out << a.stream().rdbuf();
