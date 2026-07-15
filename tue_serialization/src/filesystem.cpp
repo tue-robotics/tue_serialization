@@ -1,12 +1,12 @@
 #include "tue/serialization/filesystem.h"
 
+#include "tue/serialization/archive.h"
 #include "tue/serialization/conversions.h"
 
 #include <fstream>
+#include <string>
 
-namespace tue
-{
-namespace serialization
+namespace tue::serialization
 {
 
 // ----------------------------------------------------------------------------------------------------
@@ -48,6 +48,4 @@ bool fromFile(const std::string& filename, Archive& a)
     return true;
 }
 
-} // namespace serialization
-
-} // namespace tue
+} // namespace tue::serialization

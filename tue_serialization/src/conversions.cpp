@@ -1,11 +1,14 @@
 #include "tue/serialization/conversions.h"
+#include "tue/serialization/archive.h"
 #include "tue/serialization/output_archive.h"
 
-#include <string.h> // memcpy
+#include <cstring> // std::memcpy
+#include <ios>
+#include <istream>
+#include <ostream>
+#include <vector>
 
-namespace tue
-{
-namespace serialization
+namespace tue::serialization
 {
 
 // ----------------------------------------------------------------------------------------------------
@@ -16,7 +19,7 @@ void convert(Archive& a, std::vector<unsigned char>& data)
     convert(a.stream(), data, sizeof(version));
 
     // Fill version bytes
-    memcpy(&data[0], (char*)&version, sizeof(version));
+    std::memcpy(data.data(), &version, sizeof(version));
 }
 
 // ----------------------------------------------------------------------------------------------------
@@ -24,7 +27,7 @@ void convert(Archive& a, std::vector<unsigned char>& data)
 void convert(const Archive& a, std::ostream& out)
 {
     // Write the version to out
-    OutputArchive a_out(out);
+    const OutputArchive a_out(out);
 
     // Write data to out
     out << a.stream().rdbuf();
@@ -45,11 +48,11 @@ void convert(std::istream& s, std::vector<unsigned char>& data, int d_offset)
 {
     // get its size:
     s.seekg(0, std::ios::end);
-    int size = s.tellg();
+    const std::streamsize size = s.tellg();
     s.seekg(0, std::ios::beg);
 
     data.resize(size + d_offset);
-    s.read((char*)&data[d_offset], size);
+    s.read(reinterpret_cast<char*>(data.data() + d_offset), size);
 }
 
 // ----------------------------------------------------------------------------------------------------
@@ -57,8 +60,8 @@ void convert(std::istream& s, std::vector<unsigned char>& data, int d_offset)
 void convert(std::vector<unsigned char>& data, Archive& a)
 {
     // Read version (int)
-    int version;
-    memcpy((char*)&(a.version_), &data[0], sizeof(version));
+    const int version = 0;
+    std::memcpy(&a.version_, data.data(), sizeof(version));
 
     // Read the rest
     convert(data, a.stream(), sizeof(version));
@@ -68,9 +71,8 @@ void convert(std::vector<unsigned char>& data, Archive& a)
 
 void convert(const std::vector<unsigned char>& data, std::ostream& s, int d_offset)
 {
-    s.write((char*)&data[d_offset], data.size() - d_offset);
+    s.write(reinterpret_cast<const char*>(data.data() + d_offset),
+            static_cast<std::streamsize>(data.size() - d_offset));
 }
 
-} // namespace serialization
-
-} // namespace tue
+} // namespace tue::serialization
