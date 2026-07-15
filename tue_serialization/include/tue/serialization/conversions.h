@@ -1,12 +1,13 @@
 #ifndef TUE_SERIALIZATION_CONVERSIONS_H_
 #define TUE_SERIALIZATION_CONVERSIONS_H_
 
-#include <istream>
-#include <vector>
-
 #include "archive.h"
 #include "input_archive.h"
 #include "output_archive.h"
+
+#include <istream>
+#include <ostream>
+#include <vector>
 
 namespace tue
 {

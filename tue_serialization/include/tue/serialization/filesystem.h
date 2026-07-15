@@ -2,6 +2,7 @@
 #define TUE_SERIALIZATION_FILESYSTEM_H_
 
 #include <istream>
+#include <string>
 #include <vector>
 
 #include "archive.h"
